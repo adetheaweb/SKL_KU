@@ -95,6 +95,8 @@ export default function App() {
   
   const [config, setConfig] = useState<MadrasahConfig>({
     nama: "MAN 1 TASIKMALAYA",
+    npsn: "20276807",
+    tahunAjaran: "2024/2025",
     alamat: "JL. TAMAN PAHLAWAN KHZ. MUSTHAFA SUKAMANAH",
     kota: "Tasikmalaya",
     provinsi: "Jawa Barat",
@@ -257,6 +259,27 @@ export default function App() {
                       type="text" 
                       value={config.nama} 
                       onChange={(e) => setConfig(prev => ({ ...prev, nama: e.target.value }))}
+                      className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-100 outline-none"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-bold text-slate-400 uppercase">NPSN</label>
+                    <input 
+                      type="text" 
+                      value={config.npsn} 
+                      onChange={(e) => setConfig(prev => ({ ...prev, npsn: e.target.value }))}
+                      className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-100 outline-none"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-bold text-slate-400">School Year (Tahun Ajaran)</label>
+                    <input 
+                      type="text" 
+                      placeholder="e.g. 2024/2025"
+                      value={config.tahunAjaran} 
+                      onChange={(e) => setConfig(prev => ({ ...prev, tahunAjaran: e.target.value }))}
                       className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-100 outline-none"
                     />
                   </div>

@@ -42,7 +42,7 @@ export const SKLTemplate: React.FC<Props> = ({ student, config }) => {
         {/* Title */}
         <div className="text-center mb-8">
           <h3 className="text-lg font-bold border-b-2 border-black inline-block mb-1">SURAT KETERANGAN LULUS</h3>
-          <p className="font-bold">TAHUN AJARAN 2024/2025</p>
+          <p className="font-bold">TAHUN AJARAN {config.tahunAjaran}</p>
           <p className="text-sm">Nomor : {student.nomorSKL}</p>
         </div>
 
@@ -71,7 +71,7 @@ export const SKLTemplate: React.FC<Props> = ({ student, config }) => {
             
             <div className="font-medium">nomor pokok sekolah nasional</div>
             <div>:</div>
-            <div>{student.npsn}</div>
+            <div>{config.npsn || student.npsn}</div>
           </div>
         </div>
 
@@ -140,12 +140,12 @@ export const TranscriptTemplate: React.FC<Props> = ({ student, config }) => {
       <div className="text-center mb-4">
         <h3 className="text-lg font-bold">TRANSKRIP NILAI</h3>
         <h4 className="text-md font-bold italic uppercase">Madrasah Aliyah Keagamaan</h4>
-        <p className="font-bold">TAHUN AJARAN 2024/2025</p>
+        <p className="font-bold">TAHUN AJARAN {config.tahunAjaran}</p>
       </div>
 
       <div className="grid grid-cols-[200px_10px_1fr] text-sm gap-y-1 mb-6 max-w-2xl">
         <div>Satuan Pendidikan</div><div>:</div><div className="uppercase font-bold">{config.nama || student.satuanPendidikan}</div>
-        <div>Nomor Pokok Sekolah Nasional</div><div>:</div><div>{student.npsn}</div>
+        <div>Nomor Pokok Sekolah Nasional</div><div>:</div><div>{config.npsn || student.npsn}</div>
         <div>Nama Lengkap</div><div>:</div><div className="uppercase font-bold">{student.nama}</div>
         <div>Tempat dan Tanggal Lahir</div><div>:</div><div className="uppercase">{student.tempatLahir}, {student.tanggalLahir}</div>
         <div>Nomor Induk Siswa Nasional</div><div>:</div><div>{student.nisn}</div>

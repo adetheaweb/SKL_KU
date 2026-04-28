@@ -22,6 +22,8 @@ export interface SubjectGrade {
 
 export interface MadrasahConfig {
   nama: string;
+  npsn: string;
+  tahunAjaran: string;
   alamat: string;
   kota: string;
   provinsi: string;
