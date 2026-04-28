@@ -76,7 +76,7 @@ export const SKLTemplate: React.FC<Props> = ({ student, config }) => {
         </div>
 
         <p className="mb-8 text-justify">
-          dinyatakan <span className="font-bold">LULUS</span> berdasarkan surat keputusan kepala <span className="font-bold">{config.nama || student.satuanPendidikan}</span> Nomor B.645/Ma.10.20/PP.01/05/2025 tanggal 05 Mei 2025 setelah memenuhi seluruh kriteria sesuai dengan peraturan perundang-undangan.
+          dinyatakan <span className="font-bold">LULUS</span> berdasarkan surat keputusan kepala <span className="font-bold">{config.nama || student.satuanPendidikan}</span> Nomor {student.nomorSKL} tanggal 05 Mei 2025 setelah memenuhi seluruh kriteria sesuai dengan peraturan perundang-undangan.
         </p>
 
         <p className="mb-12">Demikian surat keterangan ini dibuat untuk digunakan sebagaimana mestinya.</p>
