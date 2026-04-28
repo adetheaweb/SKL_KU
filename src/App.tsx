@@ -3,15 +3,95 @@ import React, { useState } from 'react';
 import { ExcelUploader } from './components/ExcelUploader';
 import { SKLTemplate, TranscriptTemplate } from './components/Templates';
 import { type Student, type MadrasahConfig } from './types';
-import { Printer, Users, Eye, FileText, LayoutGrid, Settings, Upload, Image as ImageIcon, Download } from 'lucide-react';
+import { Printer, Users, Eye, FileText, LayoutGrid, Settings, Upload, Image as ImageIcon, Download, HelpCircle, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { cn } from './lib/utils';
+
+const GuideModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen, onClose }) => {
+  if (!isOpen) return null;
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.95, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[80vh] overflow-hidden flex flex-col"
+      >
+        <div className="p-6 border-b border-slate-100 flex items-center justify-between bg-blue-600 text-white">
+          <div className="flex items-center gap-3">
+            <HelpCircle className="w-6 h-6" />
+            <h2 className="text-xl font-bold">Panduan Penggunaan Wacana Negeri SKL</h2>
+          </div>
+          <button onClick={onClose} className="p-2 hover:bg-white/20 rounded-full transition-colors">
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+        
+        <div className="p-8 overflow-y-auto space-y-8">
+          <section className="space-y-4">
+            <div className="flex items-center gap-2 text-blue-600 font-bold">
+              <div className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center text-xs">1</div>
+              <h3>Persiapan Database Excel</h3>
+            </div>
+            <p className="text-slate-600 text-sm leading-relaxed ml-8">
+              Siapkan file Excel (.xlsx) dengan kolom yang sesuai: <strong>nama, nisn, tempatLahir, tanggalLahir, nomorPeserta, npsn, nomorSKL, tanggalKelulusan</strong>. Pastikan tidak ada baris kosong di tengah data.
+            </p>
+          </section>
+
+          <section className="space-y-4">
+            <div className="flex items-center gap-2 text-blue-600 font-bold">
+              <div className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center text-xs">2</div>
+              <h3>Pengaturan Identitas Madrasah</h3>
+            </div>
+            <p className="text-slate-600 text-sm leading-relaxed ml-8">
+              Buka menu <strong>"Settings"</strong> di sidebar. Masukkan Nama Madrasah, Alamat, Kota, dan Nama Kepala Madrasah. Unggah logo Madrasah (PNG/JPG) untuk hasil yang profesional.
+            </p>
+          </section>
+
+          <section className="space-y-4">
+            <div className="flex items-center gap-2 text-blue-600 font-bold">
+              <div className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center text-xs">3</div>
+              <h3>Pratinjau & Pengecekan</h3>
+            </div>
+            <p className="text-slate-600 text-sm leading-relaxed ml-8">
+              Klik nama siswa di daftar sidebar untuk melihat tampilan dokumen. Anda bisa beralih antara mode <strong>"SKL"</strong> atau <strong>"TRANSCRIPT"</strong> melalui tombol di bagian atas pratinjau.
+            </p>
+          </section>
+
+          <section className="space-y-4">
+            <div className="flex items-center gap-2 text-blue-600 font-bold">
+              <div className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center text-xs">4</div>
+              <h3>Mencetak ke PDF</h3>
+            </div>
+            <p className="text-slate-600 text-sm leading-relaxed ml-8">
+              Untuk mencetak satu siswa, klik ikon <strong>Print Documents</strong> di pojok kanan atas. Untuk mencetak seluruh siswa sekaligus, gunakan tombol <strong>"DOWNLOAD SEMUA SKL"</strong> yang ada di bawah daftar siswa.
+            </p>
+            <div className="bg-amber-50 border border-amber-100 p-4 rounded-xl ml-8">
+              <p className="text-xs text-amber-800">
+                <strong>Tips Cetak:</strong> Saat jendela print muncul, pastikan "Destination" adalah "Save as PDF", Ukuran kertas "A4", dan "Margins" diatur ke "None" untuk hasil terbaik.
+              </p>
+            </div>
+          </section>
+        </div>
+
+        <div className="p-6 border-t border-slate-100 bg-slate-50 flex justify-end">
+          <button 
+            onClick={onClose}
+            className="px-6 py-2 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition-colors"
+          >
+            Mengerti, Siap Mulai!
+          </button>
+        </div>
+      </motion.div>
+    </div>
+  );
+};
 
 export default function App() {
   const [students, setStudents] = useState<Student[]>([]);
   const [selectedStudent, setSelectedStudent] = useState<Student | null>(null);
   const [viewMode, setViewMode] = useState<'skl' | 'transcript'>('skl');
   const [activeTab, setActiveTab] = useState<'students' | 'settings'>('students');
+  const [isGuideOpen, setIsGuideOpen] = useState(false);
   
   const [config, setConfig] = useState<MadrasahConfig>({
     nama: "MAN 1 TASIKMALAYA",
@@ -252,6 +332,16 @@ export default function App() {
             </div>
           </div>
         )}
+
+        <div className="p-4 mt-auto border-t border-slate-100">
+          <button 
+            onClick={() => setIsGuideOpen(true)}
+            className="w-full flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all font-medium text-sm"
+          >
+            <HelpCircle className="w-5 h-5" />
+            Panduan Penggunaan
+          </button>
+        </div>
       </aside>
 
       {/* Main Content Area */}
@@ -357,6 +447,7 @@ export default function App() {
           .print-break { break-after: page; }
         }
       `}</style>
+      <GuideModal isOpen={isGuideOpen} onClose={() => setIsGuideOpen(false)} />
     </div>
   );
 }
