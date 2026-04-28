@@ -10,7 +10,7 @@ interface Props {
 
 export const SKLTemplate: React.FC<Props> = ({ student, config }) => {
   return (
-    <div id={`skl-${student.id}`} className="relative w-[210mm] min-h-[297mm] h-fit bg-white p-[20mm] mx-auto shadow-lg print:shadow-none print:m-0 print:p-[15mm] flex flex-col font-serif text-gray-900 border-[1px] border-gray-200 print:break-after-page overflow-hidden">
+    <div id={`skl-${student.id}`} className="relative w-[210mm] min-h-[297mm] h-fit bg-white p-[20mm] mx-auto shadow-lg print:shadow-none print:m-0 print:p-[15mm] flex flex-col font-serif text-gray-900 border-[1px] border-gray-200 print:border-none print:break-after-page overflow-hidden">
       {/* Watermark */}
       {config.logoUrl && (
         <div className="absolute inset-0 flex items-center justify-center opacity-[0.05] pointer-events-none z-0">
@@ -109,7 +109,7 @@ export const TranscriptTemplate: React.FC<Props> = ({ student, config }) => {
     : "0.00";
 
   return (
-    <div id={`transcript-${student.id}`} className="relative w-[210mm] min-h-[297mm] h-fit bg-white p-[20mm] mx-auto shadow-lg print:shadow-none print:m-0 print:p-[15mm] flex flex-col font-serif text-gray-900 border-[1px] border-gray-200 mt-10 print:mt-0 print:break-after-page overflow-hidden">
+    <div id={`transcript-${student.id}`} className="relative w-[210mm] min-h-[297mm] h-fit bg-white p-[20mm] mx-auto shadow-lg print:shadow-none print:m-0 print:p-[15mm] flex flex-col font-serif text-gray-900 border-[1px] border-gray-200 print:border-none mt-10 print:mt-0 print:break-after-page overflow-hidden">
       {/* Watermark */}
       {config.logoUrl && (
         <div className="absolute inset-0 flex items-center justify-center opacity-[0.05] pointer-events-none z-0">

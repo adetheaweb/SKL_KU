@@ -352,7 +352,7 @@ export default function App() {
       <style>{`
         @media print {
           body { background: white !important; margin: 0; padding: 0; }
-          @page { size: A4; margin: 10mm; }
+          @page { size: A4; margin: 0; }
           aside, header, .print-hidden { display: none !important; }
           .print-break { break-after: page; }
         }
